@@ -4,7 +4,7 @@ C'est pour un devoir à faire en BTS SIO SLAM.
 
 Globalement, c'est un simple formulaire avec un champ pour rentrer du texte et un autre pour la sélection du nombre de lignes à effectuer.
 
-J'ai utilisé les sessions et cookies pour améliorer un peu le tout (avec une grande aide de Stackoverflow, il faut dire que la syntaxe abrégée des conditions en .PHP, c'est pas encore mon fort).
+J'ai utilisé les sessions et cookies pour améliorer un peu le tout (avec une grande aide de Stackoverflow, il faut dire que la syntaxe abrégée des conditions en .PHP, c'est pas encore mon fort). https://stackoverflow.com/questions/40528622/echo-selected-in-chosen-select (c'est toujours bon de mettre la source de notre solution)
 
 **Ce qui a été fait :**
 
