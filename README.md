@@ -17,7 +17,7 @@ Récapitulons alors :
 
 **Les problèmes rencontrés + Les solutions apportées :**
 
-C'est globalement tout ce qui est lié aux sessions et cookies. En général, c'est juste car cela n'était pas défini à la base. J'ai donc fait une condition où les sessions et cookies sont pris en compte uniquement qu'à partir du moment où on a envoyé une première fois le formulaire.
+C'est globalement tout ce qui est lié aux sessions. En général, c'est juste car cela n'était pas correctement défini à la base. J'ai donc fait une condition où les sessions sont pris en compte uniquement qu'à partir du moment où on a envoyé une première fois le formulaire.
 
 **Les problèmes persistants :**
 
