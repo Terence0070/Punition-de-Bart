@@ -13,9 +13,6 @@ session_start();
 if (isset($_POST["envoyer"])) {
     $_SESSION['texte'] = $_POST["texte"];
     $_SESSION['combien'] = $_POST["combien"];
-
-    // echo $_COOKIE["Cookietexte"];
-    // echo $_COOKIE["Cookiecombien"]; MONTRER LES COOKIES en commentaire
 }
 ?>
 
@@ -54,9 +51,6 @@ if (isset($_POST["envoyer"])) {
                     // var_dump($_SESSION['texte'], $texte); Quelques tests
                     // die();
                     $_SESSION["combien"] = $combien;
-                    setcookie("Cookietexte", $texte, time()+3600);  /* expire dans 1 heure */
-                    setcookie("Cookiecombien", $combien, time()+3600);  /* expire dans 1 heure */
-                    
                 }
             ?>
         </p>
