@@ -52,7 +52,7 @@ if (isset($_POST["reset_session"])) {
         <div class="tableau">
             <p class="lignes">
             <?php
-                // Affichage du texte en fonction du nombre de lignes
+                // Affichage du texte en fonction du nombre de lignes après la mise à jour de la session avec les nouvelles valeurs (voir lignes 4 à 8)
                 if (isset($_SESSION['texte']) && isset($_SESSION['combien'])) {
                     $texte = htmlspecialchars($_SESSION['texte']);
                     $combien = htmlspecialchars($_SESSION['combien']);
