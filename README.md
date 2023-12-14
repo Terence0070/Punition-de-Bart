@@ -11,8 +11,11 @@ J'ai utilisé les sessions et cookies pour améliorer un peu le tout (avec une g
 Récapitulons alors :
 
 -> Un formulaire pour rentrer la ligne qu'on souhaite écrire et le nombre de fois.
+
 -> Un CSS pour afficher un "simili"-tableau.
+
 -> Du code PHP pour récupérer les variables qu'on a utilisé (par exemple, si je mets "Je ne rendrai pas mon devoir en retard" et que je configure le nombre de lignes à 50, cela sera sauvegardé).
+
 -> Le "htmlspecialchars" que je mets tout le temps depuis mon stage pour éviter les attaques XSS et injection SQL.
 
 **Les problèmes rencontrés + Les solutions apportées :**
