@@ -1,5 +1,19 @@
 <?php
 session_start();
+
+// Mise à jour de la session avec les nouvelles valeurs du formulaire
+if (isset($_POST["envoyer"])) {
+    $_SESSION['texte'] = $_POST["texte"];
+    $_SESSION['combien'] = $_POST["combien"];
+}
+
+// Réinitialisation de la session
+if (isset($_POST["reset_session"])) {
+    session_unset();
+    session_destroy();
+    header("Location: ".$_SERVER['PHP_SELF']);
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -9,21 +23,6 @@ session_start();
 </head>
 <body>
     <h1>La punition de Bart</h1>
-
-    <?php
-    if (isset($_POST["envoyer"]) && !isset($_SESSION['texte'])) { // Si on envoie un texte et qu'on en avant pas avant dans la session... on va en créer un, justement.
-        $_SESSION['texte'] = $_POST["texte"];
-        $_SESSION['combien'] = $_POST["combien"];
-    }
-
-    // Bouton pour réinitialiser la session
-    if (isset($_POST["reset_session"])) {
-        session_unset();
-        session_destroy();  // Détruit la session après l'avoir "retiré".
-        header("Location: ".$_SERVER['PHP_SELF']);  // On recharge la page (ça évite les erreurs)
-        exit();
-    }
-    ?>
 
 <form method="POST" class="form">
     <div class="champ_form">
@@ -52,12 +51,13 @@ session_start();
 <div class="bordure_tableau">
         <div class="tableau">
             <p class="lignes">
-                <?php
-                if (isset($_POST["envoyer"]) && isset($_SESSION['texte'])) { // On envoie le texte qui va devenir en "Session"
-                    $texte = htmlspecialchars($_SESSION['texte']); // htmlspecialchars, mon grand classique en terme de protection d'un formulaire.
+            <?php
+                // Affichage du texte en fonction du nombre de lignes
+                if (isset($_SESSION['texte']) && isset($_SESSION['combien'])) {
+                    $texte = htmlspecialchars($_SESSION['texte']);
                     $combien = htmlspecialchars($_SESSION['combien']);
                     for ($i = 0; $i < $combien; $i++) {
-                        echo "$texte <br>"; // On répète les lignes autant de fois qu'il a été choisi.
+                        echo "$texte <br>";
                     }
                 }
                 ?>
