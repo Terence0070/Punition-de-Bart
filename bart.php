@@ -1,20 +1,29 @@
 <?php
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Punition de Bart</title>
+    <title>Punition de Bart</title>
 </head>
 <body>
-<h1>La punition de Bart</h1>
+    <h1>La punition de Bart</h1>
 
-<?php
-if (isset($_POST["envoyer"])) {
-    $_SESSION['texte'] = $_POST["texte"];
-    $_SESSION['combien'] = $_POST["combien"];
-}
-?>
+    <?php
+    if (isset($_POST["envoyer"]) && !isset($_SESSION['texte'])) {
+        $_SESSION['texte'] = $_POST["texte"];
+        $_SESSION['combien'] = $_POST["combien"];
+    }
+
+    // Pour réinitialiser la session
+    if (isset($_POST["reset_session"])) {
+        session_unset();  // Supprime toutes les variables de session
+        session_destroy();  // Détruit la session
+        header("Location: ".$_SERVER['PHP_SELF']);  // Redirige vers la même page pour éviter les problèmes de rechargement du formulaire
+        exit();
+    }
+    ?>
 
 <form method="POST" class="form">
     <div class="champ_form">
@@ -35,27 +44,28 @@ if (isset($_POST["envoyer"])) {
     <div class="champ_form">
         <input class="champ_form_envoyer" type="submit" name="envoyer">
     </div>
+    <div class="champ_form">
+        <input class="champ_form_envoyer" type="submit" name="reset_session" value="Réinitialiser la session">
+    </div>
 </form>
 
 <div class="bordure_tableau">
-    <div class="tableau">
-        <p class="lignes">
-            <?php
-                if (isset($_POST["envoyer"])) {
-                    $texte = htmlspecialchars($_POST["texte"]);
-                    $combien = htmlspecialchars($_POST["combien"]);
-                        for ($i = 0; $i < $combien; $i++) {
-                            echo "$texte <br>";
-                            }
-                    $_SESSION["texte"] = $texte;
-                    // var_dump($_SESSION['texte'], $texte); Quelques tests
-                    // die();
-                    $_SESSION["combien"] = $combien;
+        <div class="tableau">
+            <p class="lignes">
+                <?php
+                if (isset($_POST["envoyer"]) && isset($_SESSION['texte'])) {
+                    $texte = htmlspecialchars($_SESSION['texte']);
+                    $combien = htmlspecialchars($_SESSION['combien']);
+                    for ($i = 0; $i < $combien; $i++) {
+                        echo "$texte <br>";
+                    }
                 }
-            ?>
-        </p>
+                ?>
+            </p>
+        </div>
     </div>
-</div>
+</body>
+</html>
 
 <style>
     h1 {
