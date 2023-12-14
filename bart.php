@@ -11,16 +11,16 @@ session_start();
     <h1>La punition de Bart</h1>
 
     <?php
-    if (isset($_POST["envoyer"]) && !isset($_SESSION['texte'])) {
+    if (isset($_POST["envoyer"]) && !isset($_SESSION['texte'])) { // Si on envoie un texte et qu'on en avant pas avant dans la session... on va en créer un, justement.
         $_SESSION['texte'] = $_POST["texte"];
         $_SESSION['combien'] = $_POST["combien"];
     }
 
-    // Pour réinitialiser la session
+    // Bouton pour réinitialiser la session
     if (isset($_POST["reset_session"])) {
-        session_unset();  // Supprime toutes les variables de session
-        session_destroy();  // Détruit la session
-        header("Location: ".$_SERVER['PHP_SELF']);  // Redirige vers la même page pour éviter les problèmes de rechargement du formulaire
+        session_unset();
+        session_destroy();  // Détruit la session après l'avoir "retiré".
+        header("Location: ".$_SERVER['PHP_SELF']);  // On recharge la page (ça évite les erreurs)
         exit();
     }
     ?>
@@ -28,11 +28,11 @@ session_start();
 <form method="POST" class="form">
     <div class="champ_form">
         <label for="ligne">Quelle est la ligne à écrire ?</label>
-        <input type="text" value='<?php echo isset($_SESSION["texte"]) ? $_SESSION["texte"] : ""; ?>' placeholder="Entrez un texte" name="texte" required>
+        <input type="text" value='<?php echo isset($_SESSION["texte"]) ? $_SESSION["texte"] : ""; ?>' placeholder="Entrez un texte" name="texte" required> <!-- On récupère la variable "texte" si elle est déjà dans une session, sinon c'est vide -->
     </div>
     <div class="champ_form">
         <label for="combien">Combien de lignes ?</label>
-        <select name="combien">
+        <select name="combien"> <!-- On récupère la variable "combien" si elle est déjà dans une session, sa valeur est la même que l'option "select" qu'on a choisi (si on a choisi 50, il y a un echo " selected" qui met automatiquement au même nombre) -->
             <option <?php if (isset($_SESSION['combien']) && $_SESSION['combien'] == "10") { echo ' selected'; } ?> value="10">10</option>
             <option <?php if (isset($_SESSION['combien']) && $_SESSION['combien'] == "25") { echo ' selected'; } ?> value="25">25</option>
             <option <?php if (isset($_SESSION['combien']) && $_SESSION['combien'] == "50") { echo ' selected'; } ?> value="50">50</option>
@@ -42,10 +42,10 @@ session_start();
         </select>
     </div>
     <div class="champ_form">
-        <input class="champ_form_envoyer" type="submit" name="envoyer">
+        <input class="champ_form_envoyer" type="submit" name="envoyer"> <!-- Envoyer -->
     </div>
     <div class="champ_form">
-        <input class="champ_form_envoyer" type="submit" name="reset_session" value="Réinitialiser la session">
+        <input class="champ_form_envoyer" type="submit" name="reset_session" value="Réinitialiser la session"> <!-- Bouton pour réinitialiser la session, ligne 20 -->
     </div>
 </form>
 
@@ -53,11 +53,11 @@ session_start();
         <div class="tableau">
             <p class="lignes">
                 <?php
-                if (isset($_POST["envoyer"]) && isset($_SESSION['texte'])) {
-                    $texte = htmlspecialchars($_SESSION['texte']);
+                if (isset($_POST["envoyer"]) && isset($_SESSION['texte'])) { // On envoie le texte qui va devenir en "Session"
+                    $texte = htmlspecialchars($_SESSION['texte']); // htmlspecialchars, mon grand classique en terme de protection d'un formulaire.
                     $combien = htmlspecialchars($_SESSION['combien']);
                     for ($i = 0; $i < $combien; $i++) {
-                        echo "$texte <br>";
+                        echo "$texte <br>"; // On répète les lignes autant de fois qu'il a été choisi.
                     }
                 }
                 ?>
