@@ -44,7 +44,7 @@ if (isset($_POST["reset_session"])) {
         <input class="champ_form_envoyer" type="submit" name="envoyer"> <!-- Envoyer -->
     </div>
     <div class="champ_form">
-        <input class="champ_form_envoyer" type="submit" name="reset_session" value="Réinitialiser la session"> <!-- Bouton pour réinitialiser la session, ligne 20 -->
+        <input class="champ_form_envoyer" type="submit" name="reset_session" value="Réinitialiser la session"> <!-- Bouton pour réinitialiser la session, ligne 10 -->
     </div>
 </form>
 
